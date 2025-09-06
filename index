@@ -1,0 +1,2038 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Изучение React - Интерактивный курс</title>
+     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#5D5CDE',
+                        dark: '#181818'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-white dark:bg-dark text-gray-900 dark:text-white transition-colors duration-300">
+    <!-- Header -->
+    <header class="bg-white dark:bg-gray-800 shadow-lg border-b border-gray-200 dark:border-gray-700">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
+                        <i class="fab fa-react text-white text-xl"></i>
+                    </div>
+                    <h1 class="text-2xl font-bold text-gray-900 dark:text-white">React Мастер</h1>
+                </div>
+                <nav class="hidden md:flex space-x-6">
+                    <button onclick="showHome()" class="nav-btn text-gray-600 dark:text-gray-300 hover:text-primary transition-colors">
+                        <i class="fas fa-home mr-2"></i>Главная
+                    </button>
+                    <button onclick="showGuide()" class="nav-btn text-gray-600 dark:text-gray-300 hover:text-primary transition-colors">
+                        <i class="fas fa-book mr-2"></i>Конспект
+                    </button>
+                    <button onclick="showTests()" class="nav-btn text-gray-600 dark:text-gray-300 hover:text-primary transition-colors">
+                        <i class="fas fa-tasks mr-2"></i>Тесты
+                    </button>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Home Page -->
+        <div id="home-page" class="page-content">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-primary to-blue-600 bg-clip-text text-transparent">
+                    Изучай React эффективно
+                </h2>
+                <p class="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+                    Полный курс по основам React с интерактивными тестами для закрепления знаний. 
+                    Изучайте теорию и проверяйте знания на практике.
+                </p>
+            </div>
+
+            <!-- Stats -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+                <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg border border-gray-200 dark:border-gray-700">
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center mr-4">
+                            <i class="fas fa-book-open text-blue-600 dark:text-blue-400 text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold">10 разделов</h3>
+                            <p class="text-gray-600 dark:text-gray-400">Полный конспект</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg border border-gray-200 dark:border-gray-700">
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 bg-green-100 dark:bg-green-900 rounded-lg flex items-center justify-center mr-4">
+                            <i class="fas fa-question-circle text-green-600 dark:text-green-400 text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold">100+ вопросов</h3>
+                            <p class="text-gray-600 dark:text-gray-400">Интерактивные тесты</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg border border-gray-200 dark:border-gray-700">
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 bg-purple-100 dark:bg-purple-900 rounded-lg flex items-center justify-center mr-4">
+                            <i class="fas fa-trophy text-purple-600 dark:text-purple-400 text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold">Прогресс</h3>
+                            <p class="text-gray-600 dark:text-gray-400">Отслеживание</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl p-8 text-white">
+                    <h3 class="text-2xl font-bold mb-4">📚 Изучить конспект</h3>
+                    <p class="mb-6 opacity-90">Полный материал по основам React с примерами кода и объяснениями</p>
+                    <button onclick="showGuide()" class="bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+                        Открыть конспект
+                    </button>
+                </div>
+                <div class="bg-gradient-to-br from-primary to-purple-600 rounded-xl p-8 text-white">
+                    <h3 class="text-2xl font-bold mb-4">🧪 Пройти тесты</h3>
+                    <p class="mb-6 opacity-90">Проверьте свои знания с помощью интерактивных тестов по каждой теме</p>
+                    <button onclick="showTests()" class="bg-white text-primary px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+                        Начать тестирование
+                    </button>
+                </div>
+            </div>
+
+            <!-- Progress Overview -->
+            <div class="mt-12 bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg border border-gray-200 dark:border-gray-700">
+                <h3 class="text-xl font-bold mb-4">Ваш прогресс</h3>
+                <div class="space-y-3" id="progress-overview">
+                    <!-- Progress will be loaded here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Guide Page -->
+        <div id="guide-page" class="page-content hidden">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-8">
+                    <h2 class="text-3xl font-bold mb-4">Конспект по React</h2>
+                    <p class="text-gray-600 dark:text-gray-300">Полный материал для изучения основ React</p>
+                </div>
+
+                <!-- Table of Contents -->
+                <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg border border-gray-200 dark:border-gray-700 mb-8">
+                    <h3 class="text-xl font-bold mb-4">📋 Содержание</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                        <a href="#section-1" class="flex items-center p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                            <span class="w-8 h-8 bg-primary text-white rounded-full flex items-center justify-center text-sm mr-3">1</span>
+                            <span>Основы React</span>
+                        </a>
+                        <a href="#section-2" class="flex items-center p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                            <span class="w-8 h-8 bg-primary text-white rounded-full flex items-center justify-center text-sm mr-3">2</span>
+                            <span>Первый компонент</span>
+                        </a>
+                        <a href="#section-3" class="flex items-center p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                            <span class="w-8 h-8 bg-primary text-white rounded-full flex items-center justify-center text-sm mr-3">3</span>
+                            <span>Импорт и экспорт</span>
+                        </a>
+                        <a href="#section-4" class="flex items-center p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                            <span class="w-8 h-8 bg-primary text-white rounded-full flex items-center justify-center text-sm mr-3">4</span>
+                            <span>JSX разметка</span>
+                        </a>
+                        <a href="#section-5" class="flex items-center p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                            <span class="w-8 h-8 bg-primary text-white rounded-full flex items-center justify-center text-sm mr-3">5</span>
+                            <span>JavaScript в JSX</span>
+                        </a>
+                        <a href="#section-6" class="flex items-center p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                            <span class="w-8 h-8 bg-primary text-white rounded-full flex items-center justify-center text-sm mr-3">6</span>
+                            <span>Props компонентов</span>
+                        </a>
+                        <a href="#section-7" class="flex items-center p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                            <span class="w-8 h-8 bg-primary text-white rounded-full flex items-center justify-center text-sm mr-3">7</span>
+                            <span>Условный рендеринг</span>
+                        </a>
+                        <a href="#section-8" class="flex items-center p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                            <span class="w-8 h-8 bg-primary text-white rounded-full flex items-center justify-center text-sm mr-3">8</span>
+                            <span>Рендеринг списков</span>
+                        </a>
+                        <a href="#section-9" class="flex items-center p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                            <span class="w-8 h-8 bg-primary text-white rounded-full flex items-center justify-center text-sm mr-3">9</span>
+                            <span>Чистые компоненты</span>
+                        </a>
+                        <a href="#section-10" class="flex items-center p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                            <span class="w-8 h-8 bg-primary text-white rounded-full flex items-center justify-center text-sm mr-3">10</span>
+                            <span>UI как дерево</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Guide Content -->
+                <div class="guide-content space-y-12">
+                    <!-- Section 1 -->
+                    <section id="section-1" class="bg-white dark:bg-gray-800 rounded-xl p-8 shadow-lg border border-gray-200 dark:border-gray-700">
+                        <h2 class="text-2xl font-bold mb-6 flex items-center">
+                            <span class="w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center text-lg mr-4">1</span>
+                            Основы React
+                        </h2>
+                        <div class="prose dark:prose-invert max-w-none">
+                            <p class="text-lg text-gray-700 dark:text-gray-300 mb-4">
+                                <strong>React</strong> — это JavaScript-библиотека для рендеринга пользовательских интерфейсов, которая применяет компонентный подход к разработке. Всё приложение, разработанное на React, состоит из переиспользуемых компонентов, которые могут быть как огромными, как всё приложение, так и маленькими, как кнопка.
+                            </p>
+                            
+                            <h3 class="text-xl font-semibold mt-6 mb-4">🧩 Компонентный подход</h3>
+                            <ul class="list-disc pl-6 space-y-2">
+                                <li>Компоненты могут встраиваться в другие компоненты с помощью импортов и экспортов</li>
+                                <li>Каждый компонент отвечает за свою часть интерфейса</li>
+                                <li>Переиспользуемость кода и модульность</li>
+                            </ul>
+
+                            <h3 class="text-xl font-semibold mt-6 mb-4">📝 JSX и DOM-разметка</h3>
+                            <p>JSX — это синтаксис, который упрощает создание динамической разметки. Основные правила:</p>
+                            <ul class="list-disc pl-6 space-y-2">
+                                <li>Каждый открывающий тег должен иметь закрывающий тег</li>
+                                <li>Вся разметка должна быть обёрнута в один корневой тег или JSX-фрагмент</li>
+                                <li>Тег должен находиться на той же строке, что и return или после открывающей скобки</li>
+                            </ul>
+
+                            <h3 class="text-xl font-semibold mt-6 mb-4">🔗 Взаимодействие компонентов</h3>
+                            <p>С помощью <code>props</code> компоненты могут взаимодействовать друг с другом, передавая часть своих свойств потомкам. Props напоминают атрибуты HTML и могут передавать любые значения.</p>
+
+                            <h3 class="text-xl font-semibold mt-6 mb-4">🌳 Структура UI</h3>
+                            <p>UI рисуется в виде дерева, на вершине которого обычно находится компонент App. Понимание структуры этого дерева помогает разбираться в потоке данных и используется инструментами для создания сборки приложения.</p>
+                        </div>
+                    </section>
+
+                    <!-- Section 2 -->
+                    <section id="section-2" class="bg-white dark:bg-gray-800 rounded-xl p-8 shadow-lg border border-gray-200 dark:border-gray-700">
+                        <h2 class="text-2xl font-bold mb-6 flex items-center">
+                            <span class="w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center text-lg mr-4">2</span>
+                            Ваш первый компонент
+                        </h2>
+                        <div class="prose dark:prose-invert max-w-none">
+                            <h3 class="text-xl font-semibold mb-4">🏗️ Основы компонентов</h3>
+                            <p>Компоненты в React — это основные строительные блоки пользовательских интерфейсов. Они представляют собой функции JavaScript, которые возвращают JSX-разметку.</p>
+                            
+                            <div class="bg-gray-100 dark:bg-gray-900 rounded-lg p-4 my-4">
+                                <h4 class="font-semibold mb-2">Пример простого компонента:</h4>
+                                <pre class="bg-gray-800 text-green-400 p-4 rounded overflow-x-auto"><code>function Profile() {
+  return (
+    &lt;img src="https://i.imgur.com/MK3eW3Am.jpg" alt="Katherine Johnson" /&gt;
+  );
+}</code></pre>
+                            </div>
+
+                            <h3 class="text-xl font-semibold mt-6 mb-4">🔄 Использование компонентов</h3>
+                            <p>Компоненты можно встраивать в другие компоненты:</p>
+                            <div class="bg-gray-100 dark:bg-gray-900 rounded-lg p-4 my-4">
+                                <pre class="bg-gray-800 text-green-400 p-4 rounded overflow-x-auto"><code>function Gallery() {
+  return (
+    &lt;section&gt;
+      &lt;h1&gt;Замечательные ученые&lt;/h1&gt;
+      &lt;Profile /&gt;
+      &lt;Profile /&gt;
+      &lt;Profile /&gt;
+    &lt;/section&gt;
+  );
+}</code></pre>
+                            </div>
+
+                            <h3 class="text-xl font-semibold mt-6 mb-4">📤 Экспорт и импорт</h3>
+                            <p>Для использования компонентов в других частях приложения они должны быть экспортированы:</p>
+                            <div class="bg-gray-100 dark:bg-gray-900 rounded-lg p-4 my-4">
+                                <pre class="bg-gray-800 text-green-400 p-4 rounded overflow-x-auto"><code>export default function Profile() {
+  return (
+    &lt;img src="https://i.imgur.com/MK3eW3Am.jpg" alt="Katherine Johnson" /&gt;
+  );
+}</code></pre>
+                            </div>
+
+                            <h3 class="text-xl font-semibold mt-6 mb-4">⚠️ Важные правила</h3>
+                            <ul class="list-disc pl-6 space-y-2">
+                                <li>Определение одного компонента внутри другого — плохая практика</li>
+                                <li>Компоненты должны называться с большой буквы</li>
+                                <li>Каждый компонент должен возвращать JSX</li>
+                            </ul>
+                        </div>
+                    </section>
+
+                    <!-- Section 3 -->
+                    <section id="section-3" class="bg-white dark:bg-gray-800 rounded-xl p-8 shadow-lg border border-gray-200 dark:border-gray-700">
+                        <h2 class="text-2xl font-bold mb-6 flex items-center">
+                            <span class="w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center text-lg mr-4">3</span>
+                            Импорт и экспорт компонентов
+                        </h2>
+                        <div class="prose dark:prose-invert max-w-none">
+                            <h3 class="text-xl font-semibold mb-4">📤 Экспорт по умолчанию</h3>
+                            <p>Каждый файл может экспортировать один компонент как экспорт по умолчанию:</p>
+                            <div class="bg-gray-100 dark:bg-gray-900 rounded-lg p-4 my-4">
+                                <pre class="bg-gray-800 text-green-400 p-4 rounded overflow-x-auto"><code>// Profile.js
+function Profile() {
+  return &lt;div&gt;Profile&lt;/div&gt;;
+}
+export default Profile;</code></pre>
+                            </div>
+
+                            <h3 class="text-xl font-semibold mt-6 mb-4">🏷️ Именованный экспорт</h3>
+                            <p>Можно экспортировать несколько компонентов из одного файла:</p>
+                            <div class="bg-gray-100 dark:bg-gray-900 rounded-lg p-4 my-4">
+                                <pre class="bg-gray-800 text-green-400 p-4 rounded overflow-x-auto"><code>// UserComponents.js
+export function Profile() {
+  return &lt;div&gt;Profile&lt;/div&gt;;
+}
+export function UserSettings() {
+  return &lt;div&gt;Settings&lt;/div&gt;;
+}</code></pre>
+                            </div>
+
+                            <h3 class="text-xl font-semibold mt-6 mb-4">📥 Импорт компонентов</h3>
+                            <div class="space-y-4">
+                                <div>
+                                    <h4 class="font-semibold">Импорт по умолчанию:</h4>
+                                    <div class="bg-gray-100 dark:bg-gray-900 rounded-lg p-4 my-2">
+                                        <pre class="bg-gray-800 text-green-400 p-4 rounded overflow-x-auto"><code>import Profile from './Profile';</code></pre>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold">Именованный импорт:</h4>
+                                    <div class="bg-gray-100 dark:bg-gray-900 rounded-lg p-4 my-2">
+                                        <pre class="bg-gray-800 text-green-400 p-4 rounded overflow-x-auto"><code>import { Profile, UserSettings } from './UserComponents';</code></pre>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <h3 class="text-xl font-semibold mt-6 mb-4">📁 Структурирование</h3>
+                            <p>Размещение каждого компонента в отдельном файле улучшает читаемость и поддержку кода. Использование индексных файлов упрощает импорт:</p>
+                            <div class="bg-gray-100 dark:bg-gray-900 rounded-lg p-4 my-4">
+                                <pre class="bg-gray-800 text-green-400 p-4 rounded overflow-x-auto"><code>/src
+  /components
+    /User
+      Profile.js
+      UserSettings.js
+      index.js</code></pre>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Section 4 -->
+                    <section id="section-4" class="bg-white dark:bg-gray-800 rounded-xl p-8 shadow-lg border border-gray-200 dark:border-gray-700">
+                        <h2 class="text-2xl font-bold mb-6 flex items-center">
+                            <span class="w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center text-lg mr-4">4</span>
+                            Написание разметки с JSX
+                        </h2>
+                        <div class="prose dark:prose-invert max-w-none">
+                            <p class="text-lg text-gray-700 dark:text-gray-300 mb-4">
+                                <strong>JSX (JavaScript XML)</strong> — это расширение синтаксиса для JavaScript, позволяющее использовать HTML-подобные структуры в коде JavaScript.
+                            </p>
+
+                            <h3 class="text-xl font-semibold mt-6 mb-4">📋 Основные правила JSX</h3>
+                            <ol class="list-decimal pl-6 space-y-3">
+                                <li><strong>Обёртывание в один элемент:</strong> JSX требует, чтобы возвращаемый код был обёрнут в один родительский элемент или фрагмент <code>&lt;&gt; &lt;/&gt;</code></li>
+                                <li><strong>Синтаксис XML:</strong> Каждый элемент должен иметь закрывающий тег или быть самозакрывающимся</li>
+                                <li><strong>camelCase именование:</strong> Используйте <code>className</code> вместо <code>class</code>, избегайте дефисов и точек</li>
+                                <li><strong>JavaScript выражения:</strong> Вставляйте JS-код в фигурных скобках <code>{}</code></li>
+                            </ol>
+
+                            <h3 class="text-xl font-semibold mt-6 mb-4">💡 Примеры</h3>
+                            <div class="space-y-4">
+                                <div class="bg-gray-100 dark:bg-gray-900 rounded-lg p-4">
+                                    <h4 class="font-semibold mb-2">Правильный JSX:</h4>
+                                    <pre class="bg-gray-800 text-green-400 p-4 rounded overflow-x-auto"><code>&lt;div&gt;
+  &lt;h1&gt;Заголовок&lt;/h1&gt;
+  &lt;input type="text" /&gt;
+&lt;/div&gt;</code></pre>
+                                </div>
+                                <div class="bg-gray-100 dark:bg-gray-900 rounded-lg p-4">
+                                    <h4 class="font-semibold mb-2">С JavaScript выражениями:</h4>
+                                    <pre class="bg-gray-800 text-green-400 p-4 rounded overflow-x-auto"><code>const name = "Мир";
+const element = &lt;h1&gt;Привет, {name}!&lt;/h1&gt;;</code></pre>
+                                </div>
+                            </div>
+
+                            <h3 class="text-xl font-semibold mt-6 mb-4">🔧 JSX Converter</h3>
+                            <p>Если возникают трудности с написанием JSX, можно использовать инструменты вроде Babel JSX Compiler для понимания преобразования JSX в JavaScript.</p>
+                        </div>
+                    </section>
+
+                    <!-- Section 5 -->
+                    <section id="section-5" class="bg-white dark:bg-gray-800 rounded-xl p-8 shadow-lg border border-gray-200 dark:border-gray-700">
+                        <h2 class="text-2xl font-bold mb-6 flex items-center">
+                            <span class="w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center text-lg mr-4">5</span>
+                            JavaScript в JSX с фигурными скобками
+                        </h2>
+                        <div class="prose dark:prose-invert max-w-none">
+                            <p class="text-lg text-gray-700 dark:text-gray-300 mb-4">
+                                JSX позволяет встраивать JavaScript прямо внутри разметки, объединяя логику отрисовки и содержимое в одном месте.
+                            </p>
+
+                            <h3 class="text-xl font-semibold mt-6 mb-4">📝 Передача строк</h3>
+                            <p>Атрибуты и текст можно передавать через кавычки или фигурные скобки:</p>
+                            <div class="bg-gray-100 dark:bg-gray-900 rounded-lg p-4 my-4">
+                                <pre class="bg-gray-800 text-green-400 p-4 rounded overflow-x-auto"><code>// Статические строки
+className="highlight"
+
+// Динамические значения
+&lt;h1&gt;{greeting}&lt;/h1&gt;
+&lt;img src={imageUrl} /&gt;</code></pre>
+                            </div>
+
+                            <h3 class="text-xl font-semibold mt-6 mb-4">🎨 Передача объектов в стили</h3>
+                            <p>Для передачи JavaScript-объекта используйте двойные фигурные скобки <code>{{}}</code>:</p>
+                            <div class="bg-gray-100 dark:bg-gray-900 rounded-lg p-4 my-4">
+                                <pre class="bg-gray-800 text-green-400 p-4 rounded overflow-x-auto"><code>const props = {
+  name: "Kamila",
+  theme: {
+    backgroundColor: "red"
+  }
+}
+
+&lt;h1 style={props.theme}&gt;{props.name}&lt;/h1&gt;</code></pre>
+                            </div>
+
+                            <h3 class="text-xl font-semibold mt-6 mb-4">⚡ Общие правила</h3>
+                            <ul class="list-disc pl-6 space-y-2">
+                                <li>Атрибуты в кавычках передаются как строки</li>
+                                <li>Фигурные скобки позволяют внедрять логику JavaScript</li>
+                                <li>Для объектов используйте двойные фигурные скобки <code>{{}}</code></li>
+                                <li>Свойства стилей пишутся в camelCase</li>
+                            </ul>
+                        </div>
+                    </section>
+
+                    <!-- Section 6 -->
+                    <section id="section-6" class="bg-white dark:bg-gray-800 rounded-xl p-8 shadow-lg border border-gray-200 dark:border-gray-700">
+                        <h2 class="text-2xl font-bold mb-6 flex items-center">
+                            <span class="w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center text-lg mr-4">6</span>
+                            Передача props компонентам
+                        </h2>
+                        <div class="prose dark:prose-invert max-w-none">
+                            <p class="text-lg text-gray-700 dark:text-gray-300 mb-4">
+                                Props (сокращение от properties) — это основной механизм передачи данных между компонентами в React.
+                            </p>
+
+                            <h3 class="text-xl font-semibold mt-6 mb-4">📤 Передача данных</h3>
+                            <p>Каждый React-компонент может принимать props от своего родителя:</p>
+                            <div class="bg-gray-100 dark:bg-gray-900 rounded-lg p-4 my-4">
+                                <pre class="bg-gray-800 text-green-400 p-4 rounded overflow-x-auto"><code>function User({ name, age = 25 }) {
+  return &lt;h1&gt;{name}: {age}&lt;/h1&gt;;
+}</code></pre>
+                            </div>
+
+                            <h3 class="text-xl font-semibold mt-6 mb-4">👶 Передача children</h3>
+                            <p>JSX-элементы можно передавать как дочерние элементы:</p>
+                            <div class="bg-gray-100 dark:bg-gray-900 rounded-lg p-4 my-4">
+                                <pre class="bg-gray-800 text-green-400 p-4 rounded overflow-x-auto"><code>function Card({ children }) {
+  return (
+    &lt;div className="card"&gt;
+      {children}
+    &lt;/div&gt;
+  );
+}
+
+&lt;Card&gt;
+  &lt;Avatar size={100} person={{
+    name: 'Katsuko Saruhashi',
+    imageId: 'YfeOqp2'
+  }} /&gt;
+&lt;/Card&gt;</code></pre>
+                            </div>
+
+                            <h3 class="text-xl font-semibold mt-6 mb-4">🔒 Неизменяемость props</h3>
+                            <p>Props являются неизменяемыми внутри компонента — их нельзя изменять напрямую. Они предназначены для передачи данных из родительского компонента.</p>
+
+                            <h3 class="text-xl font-semibold mt-6 mb-4">💡 Пример использования</h3>
+                            <div class="bg-gray-100 dark:bg-gray-900 rounded-lg p-4 my-4">
+                                <pre class="bg-gray-800 text-green-400 p-4 rounded overflow-x-auto"><code>function App() {
+  return (
+    &lt;div&gt;
+      &lt;User name="Alice" age={30} /&gt;
+      &lt;User name="Bob" /&gt;
+      &lt;Profile&gt;
+        &lt;User name="Charlie" /&gt;
+      &lt;/Profile&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Section 7 -->
+                    <section id="section-7" class="bg-white dark:bg-gray-800 rounded-xl p-8 shadow-lg border border-gray-200 dark:border-gray-700">
+                        <h2 class="text-2xl font-bold mb-6 flex items-center">
+                            <span class="w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center text-lg mr-4">7</span>
+                            Условный рендеринг
+                        </h2>
+                        <div class="prose dark:prose-invert max-w-none">
+                            <p class="text-lg text-gray-700 dark:text-gray-300 mb-4">
+                                Условный рендеринг позволяет отображать различный контент JSX в зависимости от определённых условий.
+                            </p>
+
+                            <h3 class="text-xl font-semibold mt-6 mb-4">🔀 Использование if/else</h3>
+                            <div class="bg-gray-100 dark:bg-gray-900 rounded-lg p-4 my-4">
+                                <pre class="bg-gray-800 text-green-400 p-4 rounded overflow-x-auto"><code>function MyComponent({ isLoggedIn }) {
+  if (isLoggedIn) {
+    return &lt;h1&gt;Welcome back!&lt;/h1&gt;;
+  } else {
+    return &lt;h2&gt;Please log in.&lt;/h2&gt;;
+  }
+}</code></pre>
+                            </div>
+
+                            <h3 class="text-xl font-semibold mt-6 mb-4">❌ Возвращение null</h3>
+                            <p>Для скрытия компонента можно вернуть <code>null</code>:</p>
+                            <div class="bg-gray-100 dark:bg-gray-900 rounded-lg p-4 my-4">
+                                <pre class="bg-gray-800 text-green-400 p-4 rounded overflow-x-auto"><code>function MyComponent({ shouldRender }) {
+  if (!shouldRender) {
+    return null;
+  }
+  return &lt;h2&gt;Rendered Content&lt;/h2&gt;;
+}</code></pre>
+                            </div>
+
+                            <h3 class="text-xl font-semibold mt-6 mb-4">⚡ Логический оператор &&</h3>
+                            <div class="bg-gray-100 dark:bg-gray-900 rounded-lg p-4 my-4">
+                                <pre class="bg-gray-800 text-green-400 p-4 rounded overflow-x-auto"><code>function MyComponent({ text, shouldShow }) {
+  return &lt;h1&gt;{text} {shouldShow && "+"}&lt;/h1&gt;;
+}</code></pre>
+                            </div>
+
+                            <h3 class="text-xl font-semibold mt-6 mb-4">❓ Тернарный оператор</h3>
+                            <div class="bg-gray-100 dark:bg-gray-900 rounded-lg p-4 my-4">
+                                <pre class="bg-gray-800 text-green-400 p-4 rounded overflow-x-auto"><code>function MyComponent({ text, isExpanded }) {
+  return &lt;h1&gt;{text} {isExpanded ? "+" : "-"}&lt;/h1&gt;;
+}</code></pre>
+                            </div>
+
+                            <h3 class="text-xl font-semibold mt-6 mb-4">📝 Основные выводы</h3>
+                            <ul class="list-disc pl-6 space-y-2">
+                                <li>В React можно контролировать, какую ветку JSX отображать</li>
+                                <li>if/else нельзя встраивать прямо в JSX</li>
+                                <li>Тернарный оператор позволяет встраиваться прямо в JSX</li>
+                                <li>Логический оператор && возвращает второе значение, если первое истинно</li>
+                            </ul>
+                        </div>
+                    </section>
+
+                    <!-- Section 8 -->
+                    <section id="section-8" class="bg-white dark:bg-gray-800 rounded-xl p-8 shadow-lg border border-gray-200 dark:border-gray-700">
+                        <h2 class="text-2xl font-bold mb-6 flex items-center">
+                            <span class="w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center text-lg mr-4">8</span>
+                            Рендеринг списков
+                        </h2>
+                        <div class="prose dark:prose-invert max-w-none">
+                            <p class="text-lg text-gray-700 dark:text-gray-300 mb-4">
+                                Отрисовка списков — это процесс отображения коллекций компонентов с различными данными.
+                            </p>
+
+                            <h3 class="text-xl font-semibold mt-6 mb-4">🔍 Методы массивов</h3>
+                            <div class="space-y-4">
+                                <div>
+                                    <h4 class="font-semibold">filter() - фильтрация:</h4>
+                                    <div class="bg-gray-100 dark:bg-gray-900 rounded-lg p-4 my-2">
+                                        <pre class="bg-gray-800 text-green-400 p-4 rounded overflow-x-auto"><code>const filteredArray = arr.filter(el => el.id !== action.payload.id);</code></pre>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold">map() - преобразование:</h4>
+                                    <div class="bg-gray-100 dark:bg-gray-900 rounded-lg p-4 my-2">
+                                        <pre class="bg-gray-800 text-green-400 p-4 rounded overflow-x-auto"><code>const updatedArray = arr.map(el => 
+  el.id === action.payload.id 
+    ? {...el, title: action.payload.title} 
+    : el
+);</code></pre>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <h3 class="text-xl font-semibold mt-6 mb-4">📋 Рендеринг списка</h3>
+                            <div class="bg-gray-100 dark:bg-gray-900 rounded-lg p-4 my-4">
+                                <pre class="bg-gray-800 text-green-400 p-4 rounded overflow-x-auto"><code>&lt;ul&gt;
+  {data.map(item => (
+    &lt;li key={item.id}&gt;{item.text}&lt;/li&gt;
+  ))}
+&lt;/ul&gt;</code></pre>
+                            </div>
+
+                            <h3 class="text-xl font-semibold mt-6 mb-4">🔑 Важность ключей (key)</h3>
+                            <p>Ключи помогают React идентифицировать, какие элементы изменились. Они должны быть:</p>
+                            <ul class="list-disc pl-6 space-y-2">
+                                <li><strong>Уникальными</strong> в пределах массива</li>
+                                <li><strong>Постоянными</strong> при различных рендерингах</li>
+                                <li>Не использовать <code>Math.random()</code> как ключ</li>
+                            </ul>
+
+                            <h3 class="text-xl font-semibold mt-6 mb-4">💡 Генерация ключей</h3>
+                            <ul class="list-disc pl-6 space-y-2">
+                                <li>Предпочтительно: ID из базы данных</li>
+                                <li>Альтернатива: <code>crypto.randomUUID()</code> или библиотека <code>uuid</code></li>
+                                <li>Избегать: индекс массива (кроме статических списков)</li>
+                            </ul>
+                        </div>
+                    </section>
+
+                    <!-- Section 9 -->
+                    <section id="section-9" class="bg-white dark:bg-gray-800 rounded-xl p-8 shadow-lg border border-gray-200 dark:border-gray-700">
+                        <h2 class="text-2xl font-bold mb-6 flex items-center">
+                            <span class="w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center text-lg mr-4">9</span>
+                            Сохранение чистоты компонентов
+                        </h2>
+                        <div class="prose dark:prose-invert max-w-none">
+                            <p class="text-lg text-gray-700 dark:text-gray-300 mb-4">
+                                Чистые функции играют важную роль в разработке надежных и предсказуемых приложений.
+                            </p>
+
+                            <h3 class="text-xl font-semibold mt-6 mb-4">🧪 Понимание чистой функции</h3>
+                            <p>Чистая функция:</p>
+                            <ul class="list-disc pl-6 space-y-2">
+                                <li><strong>Детерминирована:</strong> Возвращает один результат при одинаковых входных данных</li>
+                                <li><strong>Без побочных эффектов:</strong> Не изменяет состояние вне своего контекста</li>
+                            </ul>
+
+                            <div class="space-y-4 mt-4">
+                                <div>
+                                    <h4 class="font-semibold text-green-600">✅ Правильно:</h4>
+                                    <div class="bg-gray-100 dark:bg-gray-900 rounded-lg p-4 my-2">
+                                        <pre class="bg-gray-800 text-green-400 p-4 rounded overflow-x-auto"><code>function sum(a, b) {
+  return a + b;
+}</code></pre>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-red-600">❌ Неправильно:</h4>
+                                    <div class="bg-gray-100 dark:bg-gray-900 rounded-lg p-4 my-2">
+                                        <pre class="bg-gray-800 text-red-400 p-4 rounded overflow-x-auto"><code>const a = 5;
+function incorrectSum(b) {
+  return a += b; // Изменяется внешняя переменная
+}</code></pre>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <h3 class="text-xl font-semibold mt-6 mb-4">⚛️ Чистые компоненты в React</h3>
+                            <p>React предполагает, что каждый компонент ведёт себя как чистая функция относительно своих пропсов:</p>
+                            <div class="bg-gray-100 dark:bg-gray-900 rounded-lg p-4 my-4">
+                                <pre class="bg-gray-800 text-green-400 p-4 rounded overflow-x-auto"><code>function Greeting({ name }) {
+  return &lt;h1&gt;Hello, {name}!&lt;/h1&gt;;
+}</code></pre>
+                            </div>
+
+                            <h3 class="text-xl font-semibold mt-6 mb-4">🔄 Управление побочными эффектами</h3>
+                            <p>Для побочных эффектов используйте <code>useEffect</code>:</p>
+                            <div class="bg-gray-100 dark:bg-gray-900 rounded-lg p-4 my-4">
+                                <pre class="bg-gray-800 text-green-400 p-4 rounded overflow-x-auto"><code>import { useEffect } from 'react';
+
+function ComponentWithEffect() {
+  useEffect(() => {
+    // Побочный эффект
+    return () => {
+      // Очистка
+    };
+  }, []);
+  
+  return &lt;div&gt;Component content&lt;/div&gt;;
+}</code></pre>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Section 10 -->
+                    <section id="section-10" class="bg-white dark:bg-gray-800 rounded-xl p-8 shadow-lg border border-gray-200 dark:border-gray-700">
+                        <h2 class="text-2xl font-bold mb-6 flex items-center">
+                            <span class="w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center text-lg mr-4">10</span>
+                            Понимание UI как дерева
+                        </h2>
+                        <div class="prose dark:prose-invert max-w-none">
+                            <p class="text-lg text-gray-700 dark:text-gray-300 mb-4">
+                                Деревья рендеринга и деревья зависимостей — фундаментальные концепции для понимания структуры React-приложений.
+                            </p>
+
+                            <h3 class="text-xl font-semibold mt-6 mb-4">🌳 Деревья рендеринга</h3>
+                            <p>Представляют вложенные отношения между компонентами в рамках одного рендеринга:</p>
+                            <ul class="list-disc pl-6 space-y-2">
+                                <li><strong>Условный рендеринг:</strong> Структура дерева может изменяться в зависимости от условий</li>
+                                <li><strong>Влияние на производительность:</strong> Компоненты верхнего уровня влияют на рендеринг всех подкомпонентов</li>
+                                <li><strong>Конечные компоненты:</strong> Компоненты без дочерних элементов, часто перерисовываются</li>
+                            </ul>
+
+                            <h3 class="text-xl font-semibold mt-6 mb-4">📦 Деревья зависимостей</h3>
+                            <p>Отображают связи между модулями и библиотеками в приложении:</p>
+                            <ul class="list-disc pl-6 space-y-2">
+                                <li><strong>Оптимизация сборки:</strong> Помогают управлять размером итогового пакета</li>
+                                <li><strong>Отладка производительности:</strong> Выявление тяжёлых зависимостей</li>
+                                <li><strong>Инструменты сборки:</strong> Webpack, Rollup используют эти деревья</li>
+                            </ul>
+
+                            <h3 class="text-xl font-semibold mt-6 mb-4">🎯 Практическое применение</h3>
+                            <ul class="list-disc pl-6 space-y-2">
+                                <li>Структурирование компонентов для лучшей производительности</li>
+                                <li>Оптимизация перерендеринга через понимание дерева</li>
+                                <li>Управление размером bundle через анализ зависимостей</li>
+                                <li>Улучшение времени загрузки приложения</li>
+                            </ul>
+
+                            <div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4 mt-6">
+                                <h4 class="font-semibold text-blue-800 dark:text-blue-300 mb-2">💡 Заключение</h4>
+                                <p class="text-blue-700 dark:text-blue-300">
+                                    Понимание деревьев является ключевым для создания эффективных и масштабируемых веб-приложений на React.
+                                </p>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tests Page -->
+        <div id="tests-page" class="page-content hidden">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-8">
+                    <h2 class="text-3xl font-bold mb-4">Тестирование знаний</h2>
+                    <p class="text-gray-600 dark:text-gray-300">Выберите тему для прохождения теста</p>
+                </div>
+
+                <!-- Test Selection -->
+                <div id="test-selection" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Test cards will be generated here -->
+                </div>
+
+                <!-- Test Interface -->
+                <div id="test-interface" class="hidden">
+                    <div class="bg-white dark:bg-gray-800 rounded-xl p-8 shadow-lg border border-gray-200 dark:border-gray-700">
+                        <!-- Test Header -->
+                        <div class="flex justify-between items-center mb-6">
+                            <div>
+                                <h3 id="test-title" class="text-2xl font-bold">Тест</h3>
+                                <p id="test-progress" class="text-gray-600 dark:text-gray-400">Вопрос 1 из 10</p>
+                            </div>
+                            <button onclick="exitTest()" class="text-gray-500 hover:text-red-500 transition-colors">
+                                <i class="fas fa-times text-xl"></i>
+                            </button>
+                        </div>
+
+                        <!-- Progress Bar -->
+                        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2 mb-8">
+                            <div id="progress-bar" class="bg-primary h-2 rounded-full transition-all duration-300" style="width: 10%"></div>
+                        </div>
+
+                        <!-- Question -->
+                        <div id="question-container">
+                            <h4 id="question-text" class="text-xl font-semibold mb-6">Вопрос загружается...</h4>
+                            <div id="answers-container" class="space-y-3">
+                                <!-- Answers will be generated here -->
+                            </div>
+                        </div>
+
+                        <!-- Navigation -->
+                        <div class="flex justify-between mt-8">
+                            <button id="prev-btn" onclick="previousQuestion()" class="px-6 py-3 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
+                                Назад
+                            </button>
+                            <button id="next-btn" onclick="nextQuestion()" class="px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
+                                Далее
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Test Results -->
+                <div id="test-results" class="hidden">
+                    <div class="bg-white dark:bg-gray-800 rounded-xl p-8 shadow-lg border border-gray-200 dark:border-gray-700 text-center">
+                        <div id="result-icon" class="text-6xl mb-4">🎉</div>
+                        <h3 class="text-2xl font-bold mb-4">Тест завершён!</h3>
+                        <div id="result-stats" class="text-lg mb-6">
+                            <!-- Results will be shown here -->
+                        </div>
+                        <div class="flex justify-center space-x-4">
+                            <button onclick="retakeTest()" class="px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors">
+                                Пройти снова
+                            </button>
+                            <button onclick="backToTests()" class="px-6 py-3 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors">
+                                К списку тестов
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Dark mode detection
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.documentElement.classList.add('dark');
+        }
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+            if (event.matches) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        });
+
+        // Test data
+        const testTopics = [
+            {
+                id: 1,
+                title: "Основы React",
+                icon: "⚛️",
+                description: "Компонентный подход, JSX, структура UI",
+                questions: [
+                    {
+                        question: "Что такое React?",
+                        type: "single",
+                        answers: [
+                            { text: "JavaScript-библиотека для рендеринга пользовательских интерфейсов", correct: true },
+                            { text: "Язык программирования", correct: false },
+                            { text: "База данных", correct: false },
+                            { text: "CSS-фреймворк", correct: false }
+                        ]
+                    },
+                    {
+                        question: "Какой подход использует React?",
+                        type: "single",
+                        answers: [
+                            { text: "Компонентный подход", correct: true },
+                            { text: "Объектно-ориентированный подход", correct: false },
+                            { text: "Функциональный подход", correct: false },
+                            { text: "Модульный подход", correct: false }
+                        ]
+                    },
+                    {
+                        question: "Какие правила действуют для JSX? (выберите все правильные)",
+                        type: "multiple",
+                        answers: [
+                            { text: "Каждый открывающий тег должен иметь закрывающий тег", correct: true },
+                            { text: "Разметка должна быть обёрнута в один корневой тег", correct: true },
+                            { text: "Можно использовать HTML-комментарии", correct: false },
+                            { text: "Можно не закрывать self-closing теги", correct: false }
+                        ]
+                    },
+                    {
+                        question: "Props позволяют:",
+                        type: "single",
+                        answers: [
+                            { text: "Передавать данные между компонентами", correct: true },
+                            { text: "Изменять DOM напрямую", correct: false },
+                            { text: "Создавать циклы", correct: false },
+                            { text: "Управлять памятью", correct: false }
+                        ]
+                    },
+                    {
+                        question: "UI в React рисуется в виде:",
+                        type: "single",
+                        answers: [
+                            { text: "Дерева компонентов", correct: true },
+                            { text: "Списка элементов", correct: false },
+                            { text: "Таблицы данных", correct: false },
+                            { text: "Графа зависимостей", correct: false }
+                        ]
+                    },
+                    {
+                        question: "Что позволяет React-компонентам взаимодействовать друг с другом?",
+                        type: "single",
+                        answers: [
+                            { text: "Props (свойства)", correct: true },
+                            { text: "DOM-события", correct: false },
+                            { text: "CSS-классы", correct: false },
+                            { text: "HTML-атрибуты", correct: false }
+                        ]
+                    },
+                    {
+                        question: "Как называется синтаксис, который упрощает создание динамической разметки?",
+                        type: "single",
+                        answers: [
+                            { text: "JSX", correct: true },
+                            { text: "HTML", correct: false },
+                            { text: "XML", correct: false },
+                            { text: "CSS", correct: false }
+                        ]
+                    },
+                    {
+                        question: "Какие методы массивов часто используются для работы с коллекциями в React?",
+                        type: "multiple",
+                        answers: [
+                            { text: "Array.map()", correct: true },
+                            { text: "Array.filter()", correct: true },
+                            { text: "Array.push()", correct: false },
+                            { text: "Array.splice()", correct: false }
+                        ]
+                    },
+                    {
+                        question: "Что помогает избежать непредсказуемых ошибок при расширении React-проекта?",
+                        type: "single",
+                        answers: [
+                            { text: "Поддержание чистоты компонентов", correct: true },
+                            { text: "Использование только классовых компонентов", correct: false },
+                            { text: "Отказ от использования props", correct: false },
+                            { text: "Написание всего кода в одном файле", correct: false }
+                        ]
+                    },
+                    {
+                        question: "Что находится обычно на вершине дерева UI в React-приложении?",
+                        type: "single",
+                        answers: [
+                            { text: "Компонент App", correct: true },
+                            { text: "Компонент Header", correct: false },
+                            { text: "Компонент Main", correct: false },
+                            { text: "Компонент Root", correct: false }
+                        ]
+                    }
+                ]
+            },
+            {
+                id: 2,
+                title: "Первый компонент",
+                icon: "🧩",
+                description: "Создание, использование и экспорт компонентов",
+                questions: [
+                    {
+                        question: "Что представляют собой компоненты React?",
+                        type: "single",
+                        answers: [
+                            { text: "Функции JavaScript, которые возвращают JSX", correct: true },
+                            { text: "HTML-элементы", correct: false },
+                            { text: "CSS-классы", correct: false },
+                            { text: "Базы данных", correct: false }
+                        ]
+                    },
+                    {
+                        question: "Как должны называться компоненты React?",
+                        type: "single",
+                        answers: [
+                            { text: "С большой буквы (PascalCase)", correct: true },
+                            { text: "С маленькой буквы (camelCase)", correct: false },
+                            { text: "Через дефис (kebab-case)", correct: false },
+                            { text: "Любым способом", correct: false }
+                        ]
+                    },
+                    {
+                        question: "Какой из примеров правильно экспортирует компонент?",
+                        type: "single",
+                        answers: [
+                            { text: "export default function Profile() { return <div>Profile</div>; }", correct: true },
+                            { text: "function Profile() { return <div>Profile</div>; } export Profile;", correct: false },
+                            { text: "export Profile = () => <div>Profile</div>;", correct: false },
+                            { text: "default export function Profile() { return <div>Profile</div>; }", correct: false }
+                        ]
+                    },
+                    {
+                        question: "Почему определение компонента внутри другого компонента — плохая практика?",
+                        type: "single",
+                        answers: [
+                            { text: "Это может привести к проблемам с производительностью", correct: true },
+                            { text: "Это запрещено синтаксисом JavaScript", correct: false },
+                            { text: "Это не работает в браузере", correct: false },
+                            { text: "Это нарушает стандарты HTML", correct: false }
+                        ]
+                    },
+                    {
+                        question: "Что должен возвращать компонент React?",
+                        type: "single",
+                        answers: [
+                            { text: "JSX-разметку", correct: true },
+                            { text: "HTML-строку", correct: false },
+                            { text: "JavaScript-объект", correct: false },
+                            { text: "CSS-стили", correct: false }
+                        ]
+                    },
+                    {
+                        question: "Можно ли встраивать компоненты в другие компоненты?",
+                        type: "single",
+                        answers: [
+                            { text: "Да, это основной принцип React", correct: true },
+                            { text: "Нет, каждый компонент должен быть отдельным", correct: false },
+                            { text: "Только в классовых компонентах", correct: false },
+                            { text: "Только при использовании Redux", correct: false }
+                        ]
+                    },
+                    {
+                        question: "Что такое Gallery в примере из конспекта?",
+                        type: "single",
+                        answers: [
+                            { text: "Компонент, который использует несколько компонентов Profile", correct: true },
+                            { text: "HTML-элемент", correct: false },
+                            { text: "CSS-класс", correct: false },
+                            { text: "JavaScript-функция", correct: false }
+                        ]
+                    },
+                    {
+                        question: "Какое расширение файлов обычно используется для компонентов React?",
+                        type: "single",
+                        answers: [
+                            { text: ".js или .jsx", correct: true },
+                            { text: ".html", correct: false },
+                            { text: ".css", correct: false },
+                            { text: ".react", correct: false }
+                        ]
+                    },
+                    {
+                        question: "Что происходит при импорте компонента?",
+                        type: "single",
+                        answers: [
+                            { text: "Он становится доступным для использования в текущем файле", correct: true },
+                            { text: "Он автоматически рендерится", correct: false },
+                            { text: "Он копируется в текущий файл", correct: false },
+                            { text: "Он удаляется из исходного файла", correct: false }
+                        ]
+                    },
+                    {
+                        question: "JSX является:",
+                        type: "single",
+                        answers: [
+                            { text: "Синтаксическим сахаром для React.createElement", correct: true },
+                            { text: "Новым языком программирования", correct: false },
+                            { text: "HTML внутри JavaScript", correct: false },
+                            { text: "CSS-препроцессором", correct: false }
+                        ]
+                    }
+                ]
+            },
+            {
+                id: 3,
+                title: "Импорт и экспорт",
+                icon: "📦",
+                description: "Модули, экспорт по умолчанию и именованный экспорт",
+                questions: [
+                    {
+                        question: "Сколько экспортов по умолчанию может иметь один файл?",
+                        type: "single",
+                        answers: [
+                            { text: "Один", correct: true },
+                            { text: "Два", correct: false },
+                            { text: "Неограниченно", correct: false },
+                            { text: "Ноль", correct: false }
+                        ]
+                    },
+                    {
+                        question: "Какой синтаксис используется для именованного импорта?",
+                        type: "single",
+                        answers: [
+                            { text: "import { Component } from './file';", correct: true },
+                            { text: "import Component from './file';", correct: false },
+                            { text: "import * as Component from './file';", correct: false },
+                            { text: "import './file' as Component;", correct: false }
+                        ]
+                    },
+                    {
+                        question: "Как правильно сделать именованный экспорт?",
+                        type: "multiple",
+                        answers: [
+                            { text: "export function Profile() { }", correct: true },
+                            { text: "export { Profile };", correct: true },
+                            { text: "export default Profile;", correct: false },
+                            { text: "exports.Profile = Profile;", correct: false }
+                        ]
+                    },
+                    {
+                        question: "Что такое индексный файл в структуре компонентов?",
+                        type: "single",
+                        answers: [
+                            { text: "Файл index.js, который упрощает импорт", correct: true },
+                            { text: "Первый файл в алфавитном порядке", correct: false },
+                            { text: "Файл с номером в названии", correct: false },
+                            { text: "Главный файл приложения", correct: false }
+                        ]
+                    },
+                    {
+                        question: "Какие преимущества даёт разделение компонентов по файлам?",
+                        type: "multiple",
+                        answers: [
+                            { text: "Улучшение организации кода", correct: true },
+                            { text: "Масштабируемость приложения", correct: true },
+                            { text: "Упрощение отладки", correct: true },
+                            { text: "Уменьшение размера файлов", correct: false }
+                        ]
+                    },
+                    {
+                        question: "Как правильно импортировать компонент по умолчанию?",
+                        type: "single",
+                        answers: [
+                            { text: "import Profile from './Profile';", correct: true },
+                            { text: "import { Profile } from './Profile';", correct: false },
+                            { text: "import * as Profile from './Profile';", correct: false },
+                            { text: "import './Profile' as Profile;", correct: false }
+                        ]
+                    },
+                    {
+                        question: "Что такое модуль в контексте React?",
+                        type: "single",
+                        answers: [
+                            { text: "Файл или набор файлов, содержащий код для переиспользования", correct: true },
+                            { text: "Отдельное React-приложение", correct: false },
+                            { text: "CSS-класс", correct: false },
+                            { text: "HTML-элемент", correct: false }
+                        ]
+                    },
+                    {
+                        question: "Можно ли экспортировать несколько компонентов из одного файла?",
+                        type: "single",
+                        answers: [
+                            { text: "Да, с помощью именованного экспорта", correct: true },
+                            { text: "Нет, только один компонент на файл", correct: false },
+                            { text: "Только с помощью default export", correct: false },
+                            { text: "Только в TypeScript", correct: false }
+                        ]
+                    },
+                    {
+                        question: "Какая структура файлов рекомендуется для больших проектов?",
+                        type: "single",
+                        answers: [
+                            { text: "Каждый компонент в отдельном файле с индексными файлами", correct: true },
+                            { text: "Все компоненты в одном файле", correct: false },
+                            { text: "Случайная структура", correct: false },
+                            { text: "Только по алфавиту", correct: false }
+                        ]
+                    },
+                    {
+                        question: "Что позволяет делать индексный файл (index.js)?",
+                        type: "multiple",
+                        answers: [
+                            { text: "Упрощать импорт компонентов", correct: true },
+                            { text: "Группировать экспорты", correct: true },
+                            { text: "Создавать точку входа для модуля", correct: true },
+                            { text: "Автоматически стилизовать компоненты", correct: false }
+                        ]
+                    }
+                ]
+            },
+            {
+                id: 4,
+                title: "JSX разметка",
+                icon: "📝",
+                description: "Синтаксис JSX, правила и особенности",
+                questions: [
+                    {
+                        question: "Что означает аббревиатура JSX?",
+                        type: "single",
+                        answers: [
+                            { text: "JavaScript XML", correct: true },
+                            { text: "JavaScript eXtension", correct: false },
+                            { text: "Java Syntax eXtension", correct: false },
+                            { text: "JavaScript eXecutable", correct: false }
+                        ]
+                    },
+                    {
+                        question: "Как в JSX нужно писать атрибуты HTML?",
+                        type: "single",
+                        answers: [
+                            { text: "В camelCase (например, className)", correct: true },
+                            { text: "Как в HTML (например, class)", correct: false },
+                            { text: "В snake_case (например, class_name)", correct: false },
+                            { text: "В UPPER_CASE (например, CLASS_NAME)", correct: false }
+                        ]
+                    },
+                    {
+                        question: "Какие из утверждений о JSX верны?",
+                        type: "multiple",
+                        answers: [
+                            { text: "JSX следует правилам XML", correct: true },
+                            { text: "Каждый элемент должен быть закрыт", correct: true },
+                            { text: "JSX — это не HTML", correct: true },
+                            { text: "В JSX можно использовать HTML-комментарии", correct: false }
+                        ]
+                    },
+                    {
+                        question: "Что нужно использовать для группировки элементов без создания дополнительного DOM-узла?",
+                        type: "single",
+                        answers: [
+                            { text: "Фрагмент <> </> или React.Fragment", correct: true },
+                            { text: "div элемент", correct: false },
+                            { text: "span элемент", correct: false },
+                            { text: "section элемент", correct: false }
+                        ]
+                    },
+                    {
+                        question: "Как правильно написать самозакрывающийся тег в JSX?",
+                        type: "single",
+                        answers: [
+                            { text: "<input type=\"text\" />", correct: true },
+                            { text: "<input type=\"text\">", correct: false },
+                            { text: "<input type=text />", correct: false },
+                            { text: "<input type=\"text\" ></input>", correct: false }
+                        ]
+                    },
+                    {
+                        question: "Почему в JSX используется className вместо class?",
+                        type: "single",
+                        answers: [
+                            { text: "Потому что class является зарезервированным словом в JavaScript", correct: true },
+                            { text: "Это просто соглашение React", correct: false },
+                            { text: "Для лучшей производительности", correct: false },
+                            { text: "Чтобы отличать от HTML", correct: false }
+                        ]
+                    },
+                    {
+                        question: "Что произойдет, если не обернуть JSX-элементы в один корневой элемент?",
+                        type: "single",
+                        answers: [
+                            { text: "Возникнет ошибка компиляции", correct: true },
+                            { text: "Код будет работать некорректно", correct: false },
+                            { text: "Браузер не отобразит страницу", correct: false },
+                            { text: "Ничего, это нормально", correct: false }
+                        ]
+                    },
+                    {
+                        question: "Какой инструмент помогает понять, как JSX преобразуется в JavaScript?",
+                        type: "single",
+                        answers: [
+                            { text: "Babel JSX Compiler", correct: true },
+                            { text: "Webpack", correct: false },
+                            { text: "ESLint", correct: false },
+                            { text: "TypeScript", correct: false }
+                        ]
+                    },
+                    {
+                        question: "JSX требует, чтобы все элементы были:",
+                        type: "multiple",
+                        answers: [
+                            { text: "Правильно закрыты", correct: true },
+                            { text: "Обёрнуты в один корневой элемент", correct: true },
+                            { text: "Написаны в camelCase", correct: false },
+                            { text: "Содержали обязательные атрибуты", correct: false }
+                        ]
+                    },
+                    {
+                        question: "Что делает JSX более удобным для разработки UI?",
+                        type: "single",
+                        answers: [
+                            { text: "Позволяет встраивать JavaScript-логику в разметку", correct: true },
+                            { text: "Ускоряет работу браузера", correct: false },
+                            { text: "Уменьшает размер файлов", correct: false },
+                            { text: "Автоматически оптимизирует код", correct: false }
+                        ]
+                    }
+                ]
+            },
+            {
+                id: 5,
+                title: "JavaScript в JSX",
+                icon: "⚡",
+                description: "Фигурные скобки, выражения и объекты",
+                questions: [
+                    {
+                        question: "Как встроить JavaScript-выражение в JSX?",
+                        type: "single",
+                        answers: [
+                            { text: "Заключить в фигурные скобки { }", correct: true },
+                            { text: "Заключить в квадратные скобки [ ]", correct: false },
+                            { text: "Заключить в круглые скобки ( )", correct: false },
+                            { text: "Заключить в обратные кавычки ` `", correct: false }
+                        ]
+                    },
+                    {
+                        question: "Когда нужно использовать двойные фигурные скобки {{ }}?",
+                        type: "single",
+                        answers: [
+                            { text: "При передаче объекта JavaScript", correct: true },
+                            { text: "При передаче массива", correct: false },
+                            { text: "При передаче строки", correct: false },
+                            { text: "При передаче функции", correct: false }
+                        ]
+                    },
+                    {
+                        question: "Какой из примеров правильно передаёт стили в JSX?",
+                        type: "single",
+                        answers: [
+                            { text: "<h1 style={{backgroundColor: 'red'}}>Text</h1>", correct: true },
+                            { text: "<h1 style=\"background-color: red\">Text</h1>", correct: false },
+                            { text: "<h1 style={background-color: red}>Text</h1>", correct: false },
+                            { text: "<h1 style='backgroundColor: red'>Text</h1>", correct: false }
+                        ]
+                    },
+                    {
+                        question: "Что можно передавать через фигурные скобки в JSX?",
+                        type: "multiple",
+                        answers: [
+                            { text: "Переменные", correct: true },
+                            { text: "Функции", correct: true },
+                            { text: "Выражения JavaScript", correct: true },
+                            { text: "HTML-комментарии", correct: false }
+                        ]
+                    },
+                    {
+                        question: "Как правильно передать динамическое значение в атрибут src?",
+                        type: "single",
+                        answers: [
+                            { text: "<img src={imageUrl} />", correct: true },
+                            { text: "<img src=\"{imageUrl}\" />", correct: false },
+                            { text: "<img src=imageUrl />", correct: false },
+                            { text: "<img src='${imageUrl}' />", correct: false }
+                        ]
+                    }
+                ]
+            },
+            {
+                id: 6,
+                title: "Props компонентов",
+                icon: "🎯",
+                description: "Передача и использование props, children",
+                questions: [
+                    {
+                        question: "Что означает props в React?",
+                        type: "single",
+                        answers: [
+                            { text: "Properties (свойства)", correct: true },
+                            { text: "Propositions (предложения)", correct: false },
+                            { text: "Proportions (пропорции)", correct: false },
+                            { text: "Procedures (процедуры)", correct: false }
+                        ]
+                    },
+                    {
+                        question: "Можно ли изменять props внутри компонента?",
+                        type: "single",
+                        answers: [
+                            { text: "Нет, props неизменяемы", correct: true },
+                            { text: "Да, можно изменять", correct: false },
+                            { text: "Только с помощью setState", correct: false },
+                            { text: "Только в классовых компонентах", correct: false }
+                        ]
+                    },
+                    {
+                        question: "Как правильно деструктурировать props в функциональном компоненте?",
+                        type: "single",
+                        answers: [
+                            { text: "function User({ name, age }) { }", correct: true },
+                            { text: "function User(name, age) { }", correct: false },
+                            { text: "function User([name, age]) { }", correct: false },
+                            { text: "function User(props.name, props.age) { }", correct: false }
+                        ]
+                    },
+                    {
+                        question: "Что такое children в props?",
+                        type: "single",
+                        answers: [
+                            { text: "Содержимое между открывающим и закрывающим тегом компонента", correct: true },
+                            { text: "Дочерние компоненты, определённые внутри родительского", correct: false },
+                            { text: "Массив всех props", correct: false },
+                            { text: "Свойство для управления вложенностью", correct: false }
+                        ]
+                    },
+                    {
+                        question: "Как установить значение по умолчанию для prop?",
+                        type: "single",
+                        answers: [
+                            { text: "function User({ name, age = 25 }) { }", correct: true },
+                            { text: "function User({ name, age }) { age = age || 25; }", correct: false },
+                            { text: "User.defaultProps = { age: 25 };", correct: false },
+                            { text: "function User({ name, age: 25 }) { }", correct: false }
+                        ]
+                    }
+                ]
+            },
+            {
+                id: 7,
+                title: "Условный рендеринг",
+                icon: "🔀",
+                description: "if/else, тернарный оператор, логический &&",
+                questions: [
+                    {
+                        question: "Можно ли использовать if/else прямо в JSX?",
+                        type: "single",
+                        answers: [
+                            { text: "Нет, нельзя", correct: true },
+                            { text: "Да, можно", correct: false },
+                            { text: "Только в классовых компонентах", correct: false },
+                            { text: "Только с React.Fragment", correct: false }
+                        ]
+                    },
+                    {
+                        question: "Что нужно вернуть из компонента, чтобы ничего не отображалось?",
+                        type: "single",
+                        answers: [
+                            { text: "null", correct: true },
+                            { text: "undefined", correct: false },
+                            { text: "false", correct: false },
+                            { text: "empty string \"\"", correct: false }
+                        ]
+                    },
+                    {
+                        question: "Какой оператор позволяет условно отобразить элемент?",
+                        type: "single",
+                        answers: [
+                            { text: "Логический && (AND)", correct: true },
+                            { text: "Логический || (OR)", correct: false },
+                            { text: "Оператор сравнения ==", correct: false },
+                            { text: "Оператор присваивания =", correct: false }
+                        ]
+                    },
+                    {
+                        question: "Как работает тернарный оператор в JSX?",
+                        type: "single",
+                        answers: [
+                            { text: "{condition ? valueIfTrue : valueIfFalse}", correct: true },
+                            { text: "{condition && valueIfTrue || valueIfFalse}", correct: false },
+                            { text: "{if condition then valueIfTrue else valueIfFalse}", correct: false },
+                            { text: "{condition | valueIfTrue : valueIfFalse}", correct: false }
+                        ]
+                    },
+                    {
+                        question: "Какой из примеров правильно использует условный рендеринг?",
+                        type: "multiple",
+                        answers: [
+                            { text: "{isLoggedIn && <WelcomeMessage />}", correct: true },
+                            { text: "{isLoggedIn ? <WelcomeMessage /> : <LoginForm />}", correct: true },
+                            { text: "{if (isLoggedIn) <WelcomeMessage />}", correct: false },
+                            { text: "{isLoggedIn || <LoginForm />}", correct: false }
+                        ]
+                    }
+                ]
+            },
+            {
+                id: 8,
+                title: "Рендеринг списков",
+                icon: "📋",
+                description: "map(), filter(), ключи и работа с массивами",
+                questions: [
+                    {
+                        question: "Какой метод массива чаще всего используется для рендеринга списков?",
+                        type: "single",
+                        answers: [
+                            { text: "map()", correct: true },
+                            { text: "forEach()", correct: false },
+                            { text: "filter()", correct: false },
+                            { text: "reduce()", correct: false }
+                        ]
+                    },
+                    {
+                        question: "Зачем нужен атрибут key при рендеринге списков?",
+                        type: "single",
+                        answers: [
+                            { text: "Для оптимизации процесса рендеринга React", correct: true },
+                            { text: "Для стилизации элементов", correct: false },
+                            { text: "Для доступа к элементам из JavaScript", correct: false },
+                            { text: "Для создания уникальных ID", correct: false }
+                        ]
+                    },
+                    {
+                        question: "Какие требования к ключам (key)?",
+                        type: "multiple",
+                        answers: [
+                            { text: "Должны быть уникальными в пределах массива", correct: true },
+                            { text: "Должны быть постоянными при рендерингах", correct: true },
+                            { text: "Должны быть строками", correct: false },
+                            { text: "Должны быть числами", correct: false }
+                        ]
+                    },
+                    {
+                        question: "Почему нельзя использовать Math.random() как key?",
+                        type: "single",
+                        answers: [
+                            { text: "Это приведёт к перерисовке всех элементов при каждом обновлении", correct: true },
+                            { text: "React не поддерживает случайные числа", correct: false },
+                            { text: "Это нарушает безопасность", correct: false },
+                            { text: "Это замедляет работу браузера", correct: false }
+                        ]
+                    },
+                    {
+                        question: "Какой метод используется для фильтрации массива?",
+                        type: "single",
+                        answers: [
+                            { text: "filter()", correct: true },
+                            { text: "map()", correct: false },
+                            { text: "reduce()", correct: false },
+                            { text: "sort()", correct: false }
+                        ]
+                    }
+                ]
+            },
+            {
+                id: 9,
+                title: "Чистые компоненты",
+                icon: "🧪",
+                description: "Чистые функции, побочные эффекты, useEffect",
+                questions: [
+                    {
+                        question: "Что такое чистая функция?",
+                        type: "single",
+                        answers: [
+                            { text: "Функция, которая возвращает одинаковый результат при одинаковых входных данных", correct: true },
+                            { text: "Функция без комментариев в коде", correct: false },
+                            { text: "Функция, написанная на TypeScript", correct: false },
+                            { text: "Функция без console.log", correct: false }
+                        ]
+                    },
+                    {
+                        question: "Какие характеристики у чистой функции?",
+                        type: "multiple",
+                        answers: [
+                            { text: "Детерминированность", correct: true },
+                            { text: "Отсутствие побочных эффектов", correct: true },
+                            { text: "Идемпотентность", correct: true },
+                            { text: "Асинхронность", correct: false }
+                        ]
+                    },
+                    {
+                        question: "Что React предполагает о компонентах?",
+                        type: "single",
+                        answers: [
+                            { text: "Что каждый компонент ведёт себя как чистая функция", correct: true },
+                            { text: "Что компоненты всегда асинхронны", correct: false },
+                            { text: "Что компоненты изменяют глобальное состояние", correct: false },
+                            { text: "Что компоненты должны использовать классы", correct: false }
+                        ]
+                    },
+                    {
+                        question: "Для чего используется useEffect?",
+                        type: "single",
+                        answers: [
+                            { text: "Для управления побочными эффектами", correct: true },
+                            { text: "Для создания компонентов", correct: false },
+                            { text: "Для стилизации", correct: false },
+                            { text: "Для оптимизации производительности", correct: false }
+                        ]
+                    },
+                    {
+                        question: "Какой из примеров показывает нечистую функцию?",
+                        type: "single",
+                        answers: [
+                            { text: "function add(a) { return a + Math.random(); }", correct: true },
+                            { text: "function add(a, b) { return a + b; }", correct: false },
+                            { text: "function multiply(a, b) { return a * b; }", correct: false },
+                            { text: "function square(x) { return x * x; }", correct: false }
+                        ]
+                    }
+                ]
+            },
+            {
+                id: 10,
+                title: "UI как дерево",
+                icon: "🌳",
+                description: "Деревья рендеринга, зависимости, оптимизация",
+                questions: [
+                    {
+                        question: "Что представляют деревья рендеринга?",
+                        type: "single",
+                        answers: [
+                            { text: "Вложенные отношения между компонентами", correct: true },
+                            { text: "Структуру файлов проекта", correct: false },
+                            { text: "Порядок загрузки ресурсов", correct: false },
+                            { text: "Иерархию CSS-стилей", correct: false }
+                        ]
+                    },
+                    {
+                        question: "Что такое деревья зависимостей?",
+                        type: "single",
+                        answers: [
+                            { text: "Связи между модулями и библиотеками в приложении", correct: true },
+                            { text: "Отношения между компонентами React", correct: false },
+                            { text: "Структура DOM-элементов", correct: false },
+                            { text: "Порядок выполнения функций", correct: false }
+                        ]
+                    },
+                    {
+                        question: "Как компоненты верхнего уровня влияют на производительность?",
+                        type: "single",
+                        answers: [
+                            { text: "Влияют на рендеринг всех подкомпонентов", correct: true },
+                            { text: "Не влияют на производительность", correct: false },
+                            { text: "Влияют только на соседние компоненты", correct: false },
+                            { text: "Влияют только на родительские компоненты", correct: false }
+                        ]
+                    },
+                    {
+                        question: "Для чего используются деревья зависимостей?",
+                        type: "multiple",
+                        answers: [
+                            { text: "Оптимизация сборки приложения", correct: true },
+                            { text: "Управление размером bundle", correct: true },
+                            { text: "Отладка производительности", correct: true },
+                            { text: "Создание UI-дизайна", correct: false }
+                        ]
+                    },
+                    {
+                        question: "Что такое конечные компоненты?",
+                        type: "single",
+                        answers: [
+                            { text: "Компоненты без дочерних элементов", correct: true },
+                            { text: "Последние компоненты в файле", correct: false },
+                            { text: "Компоненты с ошибками", correct: false },
+                            { text: "Компоненты в корне приложения", correct: false }
+                        ]
+                    }
+                ]
+            }
+        ];
+
+        // Current test state
+        let currentTest = null;
+        let currentQuestionIndex = 0;
+        let userAnswers = [];
+        let testStartTime = 0;
+
+        // Navigation functions
+        function showHome() {
+            hideAllPages();
+            document.getElementById('home-page').classList.remove('hidden');
+            updateNavigation('home');
+            loadProgressOverview();
+        }
+
+        function showGuide() {
+            hideAllPages();
+            document.getElementById('guide-page').classList.remove('hidden');
+            updateNavigation('guide');
+        }
+
+        function showTests() {
+            console.log('Showing tests page...');
+            hideAllPages();
+            
+            const testsPage = document.getElementById('tests-page');
+            const testSelection = document.getElementById('test-selection');
+            const testInterface = document.getElementById('test-interface');
+            const testResults = document.getElementById('test-results');
+            
+            if (!testsPage || !testSelection || !testInterface || !testResults) {
+                console.error('Test page elements not found');
+                return;
+            }
+            
+            testsPage.classList.remove('hidden');
+            testSelection.classList.remove('hidden');
+            testInterface.classList.add('hidden');
+            testResults.classList.add('hidden');
+            
+            updateNavigation('tests');
+            
+            // Загружаем тесты с небольшой задержкой чтобы убедиться что DOM готов
+            setTimeout(() => {
+                loadTestSelection();
+            }, 100);
+        }
+
+        function hideAllPages() {
+            document.querySelectorAll('.page-content').forEach(page => {
+                page.classList.add('hidden');
+            });
+        }
+
+        function updateNavigation(active) {
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('text-primary');
+                btn.classList.add('text-gray-600', 'dark:text-gray-300');
+            });
+        }
+
+        // Progress tracking
+        function getProgress() {
+            const progress = localStorage.getItem('react-test-progress');
+            return progress ? JSON.parse(progress) : {};
+        }
+
+        function saveProgress(topicId, score, totalQuestions) {
+            const progress = getProgress();
+            progress[topicId] = {
+                score: score,
+                total: totalQuestions,
+                percentage: Math.round((score / totalQuestions) * 100),
+                completedAt: new Date().toISOString()
+            };
+            localStorage.setItem('react-test-progress', JSON.stringify(progress));
+        }
+
+        function loadProgressOverview() {
+            const progress = getProgress();
+            const container = document.getElementById('progress-overview');
+            
+            if (Object.keys(progress).length === 0) {
+                container.innerHTML = '<p class="text-gray-500 dark:text-gray-400">Прогресс появится после прохождения первого теста</p>';
+                return;
+            }
+
+            let html = '';
+            testTopics.forEach(topic => {
+                const topicProgress = progress[topic.id];
+                if (topicProgress) {
+                    const percentage = topicProgress.percentage;
+                    const color = percentage >= 80 ? 'green' : percentage >= 60 ? 'yellow' : 'red';
+                    
+                    html += `
+                        <div class="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                            <div class="flex items-center">
+                                <span class="text-2xl mr-3">${topic.icon}</span>
+                                <div>
+                                    <h4 class="font-semibold">${topic.title}</h4>
+                                    <p class="text-sm text-gray-600 dark:text-gray-400">${topicProgress.score}/${topicProgress.total} правильных ответов</p>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-lg font-bold text-${color}-600">${percentage}%</div>
+                                <div class="w-20 bg-gray-200 dark:bg-gray-600 rounded-full h-2">
+                                    <div class="bg-${color}-500 h-2 rounded-full" style="width: ${percentage}%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }
+            });
+
+            container.innerHTML = html;
+        }
+
+        // Test functions
+        function loadTestSelection() {
+            console.log('Loading test selection...');
+            console.log('testTopics array:', testTopics);
+            console.log('testTopics length:', testTopics ? testTopics.length : 'undefined');
+            
+            const container = document.getElementById('test-selection');
+            const progress = getProgress();
+            
+            if (!container) {
+                console.error('Test selection container not found');
+                return;
+            }
+            
+            if (!testTopics || testTopics.length === 0) {
+                console.error('testTopics is empty or undefined');
+                container.innerHTML = '<p class="text-red-500">Ошибка: тесты не загружены</p>';
+                return;
+            }
+            
+            console.log('Container found, starting to generate HTML...');
+            
+            let html = '';
+            testTopics.forEach((topic, index) => {
+                console.log(`Processing topic ${index + 1}:`, topic.title);
+                const topicProgress = progress[topic.id];
+                const statusBadge = topicProgress 
+                    ? `<span class="px-2 py-1 text-xs bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300 rounded-full">${topicProgress.percentage}%</span>`
+                    : '<span class="px-2 py-1 text-xs bg-gray-100 text-gray-600 dark:bg-gray-800 dark:text-gray-400 rounded-full">Не пройден</span>';
+                
+                html += `
+                    <div class="test-card bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg border border-gray-200 dark:border-gray-700 hover:shadow-xl transition-shadow cursor-pointer" data-topic-id="${topic.id}">
+                        <div class="flex items-start justify-between mb-4">
+                            <div class="text-3xl">${topic.icon}</div>
+                            ${statusBadge}
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">${topic.title}</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">${topic.description}</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-gray-500">${topic.questions.length} вопросов</span>
+                            <button class="start-test-btn px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors" data-topic-id="${topic.id}">
+                                Начать тест
+                            </button>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = html;
+            
+            // Add event listeners
+            document.querySelectorAll('.test-card').forEach(card => {
+                card.addEventListener('click', function(e) {
+                    // Prevent starting test when clicking on the card itself, only on button
+                    if (!e.target.classList.contains('start-test-btn')) {
+                        return;
+                    }
+                    const topicId = parseInt(this.dataset.topicId);
+                    startTest(topicId);
+                });
+            });
+            
+            // Add event listeners for buttons specifically
+            document.querySelectorAll('.start-test-btn').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const topicId = parseInt(this.dataset.topicId);
+                    startTest(topicId);
+                });
+            });
+        }
+
+        function startTest(topicId) {
+            console.log('Starting test with topicId:', topicId);
+            
+            currentTest = testTopics.find(topic => topic.id === topicId);
+            
+            if (!currentTest) {
+                console.error('Test not found for topicId:', topicId);
+                return;
+            }
+            
+            console.log('Found test:', currentTest.title, 'with', currentTest.questions.length, 'questions');
+            
+            currentQuestionIndex = 0;
+            userAnswers = [];
+            testStartTime = Date.now();
+            
+            const testSelection = document.getElementById('test-selection');
+            const testInterface = document.getElementById('test-interface');
+            const testResults = document.getElementById('test-results');
+            
+            if (!testSelection || !testInterface || !testResults) {
+                console.error('Test containers not found');
+                return;
+            }
+            
+            testSelection.classList.add('hidden');
+            testInterface.classList.remove('hidden');
+            testResults.classList.add('hidden');
+            
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            console.log('Loading question', currentQuestionIndex + 1);
+            
+            const question = currentTest.questions[currentQuestionIndex];
+            const totalQuestions = currentTest.questions.length;
+            
+            if (!question) {
+                console.error('Question not found at index:', currentQuestionIndex);
+                return;
+            }
+            
+            console.log('Question:', question.question);
+            
+            // Update header
+            document.getElementById('test-title').textContent = currentTest.title;
+            document.getElementById('test-progress').textContent = `Вопрос ${currentQuestionIndex + 1} из ${totalQuestions}`;
+            
+            // Update progress bar
+            const progressPercentage = ((currentQuestionIndex + 1) / totalQuestions) * 100;
+            document.getElementById('progress-bar').style.width = `${progressPercentage}%`;
+            
+            // Load question
+            document.getElementById('question-text').textContent = question.question;
+            
+            // Load answers
+            const answersContainer = document.getElementById('answers-container');
+            let answersHtml = '';
+            
+            question.answers.forEach((answer, index) => {
+                const inputType = question.type === 'multiple' ? 'checkbox' : 'radio';
+                const inputName = question.type === 'multiple' ? `answer_${currentQuestionIndex}_${index}` : `answer_${currentQuestionIndex}`;
+                
+                answersHtml += `
+                    <label class="flex items-center p-4 bg-gray-50 dark:bg-gray-700 rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors">
+                        <input type="${inputType}" name="${inputName}" value="${index}" class="mr-3 text-primary focus:ring-primary" onchange="handleAnswerChange()">
+                        <span class="text-base">${answer.text}</span>
+                    </label>
+                `;
+            });
+            
+            answersContainer.innerHTML = answersHtml;
+            console.log('Loaded', question.answers.length, 'answers');
+            
+            // Update navigation buttons
+            const prevBtn = document.getElementById('prev-btn');
+            if (prevBtn) {
+                prevBtn.disabled = currentQuestionIndex === 0;
+            }
+            updateNextButton();
+        }
+
+        function handleAnswerChange() {
+            updateNextButton();
+        }
+
+        function updateNextButton() {
+            const question = currentTest.questions[currentQuestionIndex];
+            const nextBtn = document.getElementById('next-btn');
+            
+            if (question.type === 'multiple') {
+                const checkedBoxes = document.querySelectorAll(`input[name^="answer_${currentQuestionIndex}_"]:checked`);
+                nextBtn.disabled = checkedBoxes.length === 0;
+            } else {
+                const checkedRadio = document.querySelector(`input[name="answer_${currentQuestionIndex}"]:checked`);
+                nextBtn.disabled = !checkedRadio;
+            }
+            
+            // Update button text
+            if (currentQuestionIndex === currentTest.questions.length - 1) {
+                nextBtn.textContent = 'Завершить тест';
+            } else {
+                nextBtn.textContent = 'Далее';
+            }
+        }
+
+        function previousQuestion() {
+            if (currentQuestionIndex > 0) {
+                saveCurrentAnswer();
+                currentQuestionIndex--;
+                loadQuestion();
+                restoreAnswer();
+            }
+        }
+
+        function nextQuestion() {
+            saveCurrentAnswer();
+            
+            if (currentQuestionIndex < currentTest.questions.length - 1) {
+                currentQuestionIndex++;
+                loadQuestion();
+                restoreAnswer();
+            } else {
+                finishTest();
+            }
+        }
+
+        function saveCurrentAnswer() {
+            const question = currentTest.questions[currentQuestionIndex];
+            
+            if (question.type === 'multiple') {
+                const checkedBoxes = document.querySelectorAll(`input[name^="answer_${currentQuestionIndex}_"]:checked`);
+                userAnswers[currentQuestionIndex] = Array.from(checkedBoxes).map(cb => parseInt(cb.value));
+            } else {
+                const checkedRadio = document.querySelector(`input[name="answer_${currentQuestionIndex}"]:checked`);
+                userAnswers[currentQuestionIndex] = checkedRadio ? parseInt(checkedRadio.value) : null;
+            }
+        }
+
+        function restoreAnswer() {
+            const answer = userAnswers[currentQuestionIndex];
+            if (answer === undefined) return;
+            
+            const question = currentTest.questions[currentQuestionIndex];
+            
+            if (question.type === 'multiple' && Array.isArray(answer)) {
+                answer.forEach(index => {
+                    const checkbox = document.querySelector(`input[name="answer_${currentQuestionIndex}_${index}"]`);
+                    if (checkbox) checkbox.checked = true;
+                });
+            } else if (question.type === 'single' && answer !== null) {
+                const radio = document.querySelector(`input[name="answer_${currentQuestionIndex}"][value="${answer}"]`);
+                if (radio) radio.checked = true;
+            }
+            
+            updateNextButton();
+        }
+
+        function finishTest() {
+            // Calculate score
+            let correctAnswers = 0;
+            const totalQuestions = currentTest.questions.length;
+            
+            currentTest.questions.forEach((question, index) => {
+                const userAnswer = userAnswers[index];
+                const correctAnswerIndices = question.answers
+                    .map((answer, idx) => answer.correct ? idx : null)
+                    .filter(idx => idx !== null);
+                
+                if (question.type === 'multiple') {
+                    if (Array.isArray(userAnswer) && 
+                        userAnswer.length === correctAnswerIndices.length &&
+                        userAnswer.every(idx => correctAnswerIndices.includes(idx))) {
+                        correctAnswers++;
+                    }
+                } else {
+                    if (correctAnswerIndices.includes(userAnswer)) {
+                        correctAnswers++;
+                    }
+                }
+            });
+            
+            const percentage = Math.round((correctAnswers / totalQuestions) * 100);
+            const testDuration = Math.round((Date.now() - testStartTime) / 1000);
+            
+            // Save progress
+            saveProgress(currentTest.id, correctAnswers, totalQuestions);
+            
+            // Show results
+            showTestResults(correctAnswers, totalQuestions, percentage, testDuration);
+        }
+
+        function showTestResults(correct, total, percentage, duration) {
+            document.getElementById('test-interface').classList.add('hidden');
+            document.getElementById('test-results').classList.remove('hidden');
+            
+            // Set result icon and message
+            const resultIcon = document.getElementById('result-icon');
+            const resultStats = document.getElementById('result-stats');
+            
+            let icon, message, color;
+            if (percentage >= 80) {
+                icon = '🎉';
+                message = 'Отличный результат!';
+                color = 'text-green-600';
+            } else if (percentage >= 60) {
+                icon = '👍';
+                message = 'Хороший результат!';
+                color = 'text-yellow-600';
+            } else {
+                icon = '📚';
+                message = 'Стоит повторить материал';
+                color = 'text-red-600';
+            }
+            
+            resultIcon.textContent = icon;
+            
+            const minutes = Math.floor(duration / 60);
+            const seconds = duration % 60;
+            const timeString = minutes > 0 ? `${minutes}м ${seconds}с` : `${seconds}с`;
+            
+            resultStats.innerHTML = `
+                <div class="${color} text-xl font-bold mb-2">${message}</div>
+                <div class="text-gray-600 dark:text-gray-300">
+                    <p>Правильных ответов: <strong>${correct} из ${total}</strong></p>
+                    <p>Процент: <strong>${percentage}%</strong></p>
+                    <p>Время: <strong>${timeString}</strong></p>
+                </div>
+            `;
+        }
+
+        function retakeTest() {
+            startTest(currentTest.id);
+        }
+
+        function backToTests() {
+            showTests();
+        }
+
+        function exitTest() {
+            showConfirmDialog('Вы уверены, что хотите выйти из теста? Прогресс будет потерян.', showTests);
+        }
+
+        // Custom modal functions
+        function showConfirmDialog(message, onConfirm) {
+            const modal = document.createElement('div');
+            modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
+            modal.innerHTML = `
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg max-w-sm w-full mx-4">
+                    <p class="text-gray-700 dark:text-gray-300 mb-4">${message}</p>
+                    <div class="flex justify-end space-x-3">
+                        <button class="cancel-btn px-4 py-2 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded transition-colors">Отмена</button>
+                        <button class="confirm-btn px-4 py-2 bg-red-500 text-white hover:bg-red-600 rounded transition-colors">Подтвердить</button>
+                    </div>
+                </div>
+            `;
+            
+            // Add event listeners
+            const cancelBtn = modal.querySelector('.cancel-btn');
+            const confirmBtn = modal.querySelector('.confirm-btn');
+            
+            cancelBtn.onclick = () => {
+                document.body.removeChild(modal);
+            };
+            
+            confirmBtn.onclick = () => {
+                document.body.removeChild(modal);
+                if (onConfirm) onConfirm();
+            };
+            
+            document.body.appendChild(modal);
+            return true;
+        }
+
+        // Initialize app
+        document.addEventListener('DOMContentLoaded', function() {
+            showHome();
+        });
+    </script>
+</body>
+</html>
